@@ -4,7 +4,7 @@ using namespace std;
 class Pet{
 
 public:
-  Pet( string name);
+  Pet(string name);
   void shower();
   void food() ;
   void WC();
@@ -13,12 +13,13 @@ public:
   void Work() ;
   void Cure() ;
   void get_name() ;
+  void placebo();
 
   int property_of_condition(int &condition);
   void ControlProp();
 
   void change_over(int value) ;
-  void show_condition() ;//полностью переписывать
+  string condition();
   void Action(string tmp);
 protected:
   static const int DEFAULT_VALUE=100;
@@ -30,4 +31,5 @@ protected:
   int hygiene = DEFAULT_VALUE;
   int health = DEFAULT_VALUE;
   string  name;
+  string condition_;
 };
