@@ -2,7 +2,8 @@
 
  using namespace std;
 
-		Pet::Pet( string name) {}
+		Pet::Pet( string name) {condition_="happy";}
+
 	void Pet::shower() {
 			hygiene = 100;
       condition_="shower";
@@ -95,6 +96,7 @@
 		    hygiene -= value;
 			health -= 5;
 			ControlProp();
+      condition();
 
 		}
 

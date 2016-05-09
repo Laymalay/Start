@@ -11,10 +11,11 @@ Game::Game(float widht,float hight, string name): mycat_(name){
 
 void Game::start(){
   while(1){
+
     Game::render();
     Game::update();
     Game::control();
-    sleep(40);
+
 
   }
 }
@@ -36,7 +37,7 @@ void Game::control() {
           if (BUTTON_SHOWER_X<x&&BUTTON_SHOWER_X+widht>x
           &&BUTTON_SHOWER_Y<y&&BUTTON_SHOWER_Y+hight>y)
           {
-            mycat_.Action("shower");//действие
+            mycat_.Action("shower");mycat_.condition_="shower";//действие
           }
 
           if (BUTTON_FOOD_X<x&&BUTTON_FOOD_X+widht>x
@@ -82,6 +83,8 @@ void Game::control() {
 }
 void Game::update() {
     mycat_.change_over(5);
+    sleep(1);
+
 }
 
 //////////////////////////////////////////
@@ -89,7 +92,17 @@ void Game::update() {
 //////////////////////////////////////////
 void Game::render() {
   window->clear(sf::Color::White);
+  Game::draw_button_WC();
+  Game::draw_button_food();
+  Game::draw_button_Sport();
+  Game::draw_button_shower();
+  Game::draw_button_Work();
+  Game::draw_button_placebo();
+  Game::draw_button_Cure();
+  Game::draw_button_Game();
+  Game::show_condition(mycat_.condition_);
   window->display();
+
 }
 
 
@@ -114,11 +127,11 @@ void Game::show_condition (string condition_){
   if (condition_ =="cure") Game::cure();
 }
 void Game::happy(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("happy.jpg");
+  texture.loadFromFile("res/happy_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -126,11 +139,11 @@ void Game::happy(){
   window->draw(sprite);
 }
 void Game::good(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("good.jpg");
+  texture.loadFromFile("res/good_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -138,11 +151,11 @@ void Game::good(){
   window->draw(sprite);
 }
 void Game::so_so(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("soso.jpg");
+  texture.loadFromFile("res/soso_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -150,11 +163,11 @@ void Game::so_so(){
   window->draw(sprite);
 }
 void Game::sad(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("sad.jpg");
+  texture.loadFromFile("res/sad_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -162,11 +175,11 @@ void Game::sad(){
   window->draw(sprite);
 }
 void Game::verysad(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("sad.jpg");
+  texture.loadFromFile("res/verysad_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -174,11 +187,11 @@ void Game::verysad(){
   window->draw(sprite);
 }
 void Game::ill(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("ill.jpg");
+  texture.loadFromFile("res/ill_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -186,11 +199,11 @@ void Game::ill(){
   window->draw(sprite);
 }
 void Game::died(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("died.jpg");
+  texture.loadFromFile("res/died_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -202,11 +215,11 @@ void Game::died(){
 //              ACTION                  //
 //////////////////////////////////////////
 void Game::eat(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("eat.jpg");
+  texture.loadFromFile("res/eat_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -214,11 +227,11 @@ void Game::eat(){
   window->draw(sprite);
 }
 void Game::wc(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("wc.jpg");
+  texture.loadFromFile("res/wc__resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -226,11 +239,11 @@ void Game::wc(){
   window->draw(sprite);
 }
 void Game::sport(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("sport.jpg");
+  texture.loadFromFile("res/sport__resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -238,11 +251,11 @@ void Game::sport(){
   window->draw(sprite);
 }
 void Game::shower(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("shower_.jpg");
+  texture.loadFromFile("res/shower__resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -250,11 +263,11 @@ void Game::shower(){
   window->draw(sprite);
 }
 void Game::work(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("work.jpg");
+  texture.loadFromFile("res/Workresize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -262,11 +275,11 @@ void Game::work(){
   window->draw(sprite);
 }
 void Game::play(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("play.jpg");
+  texture.loadFromFile("res/play_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -274,11 +287,11 @@ void Game::play(){
   window->draw(sprite);
 }
 void Game::cure(){
-  float const X=0;
-  float const Y=0;
+  float const X=300;
+  float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("cure.jpg");
+  texture.loadFromFile("res/cure__resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -294,7 +307,7 @@ void Game::Cloud(){
   float const Y=0;
 
   sf::Texture texture;
-  texture.loadFromFile("sad.jpg");
+  texture.loadFromFile("res/sad_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -306,7 +319,7 @@ void Game::hungry(){
   float const Y=0;
 
   sf::Texture texture;
-  texture.loadFromFile("hungry.jpg");
+  texture.loadFromFile("res/hungry_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -318,7 +331,7 @@ void Game::need_wc(){
   float const Y=0;
 
   sf::Texture texture;
-  texture.loadFromFile("need_wc.jpg");
+  texture.loadFromFile("res/need_wc_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -330,7 +343,7 @@ void Game::need_cure(){
   float const Y=0;
 
   sf::Texture texture;
-  texture.loadFromFile("need_cure.jpg");
+  texture.loadFromFile("res/need_cure_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -342,11 +355,11 @@ void Game::need_cure(){
 //              BUTTON                  //
 //////////////////////////////////////////
 void Game::draw_button_shower(){
-  float const X=0;
-  float const Y=0;
+  float const X=550;
+  float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("shower.jpg");
+  texture.loadFromFile("res/shower_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -354,11 +367,11 @@ void Game::draw_button_shower(){
   window->draw(sprite);
 }
 void Game::draw_button_food(){
-  float const X=0;
-  float const Y=0;
+  float const X=150;
+  float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("food.jpg");
+  texture.loadFromFile("res/food_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -366,11 +379,11 @@ void Game::draw_button_food(){
   window->draw(sprite);
 }
 void Game::draw_button_WC(){
-  float const X=0;
-  float const Y=0;
+  float const X=350;
+  float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("WC.jpg");
+  texture.loadFromFile("res/wc_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -378,11 +391,11 @@ void Game::draw_button_WC(){
   window->draw(sprite);
 }
 void Game::draw_button_Game(){
-  float const X=0;
-  float const Y=0;
+  float const X=550;
+  float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("Game.jpg");
+  texture.loadFromFile("res/game_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -390,11 +403,11 @@ void Game::draw_button_Game(){
   window->draw(sprite);
 }
 void Game::draw_button_Sport(){
-  float const X=0;
-  float const Y=0;
+  float const X=750;
+  float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("Sport.jpg");
+  texture.loadFromFile("res/sport_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -402,11 +415,11 @@ void Game::draw_button_Sport(){
   window->draw(sprite);
 }
 void Game::draw_button_Work(){
-  float const X=0;
-  float const Y=0;
+  float const X=150;
+  float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("Work.jpg");
+  texture.loadFromFile("res/work_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -414,11 +427,11 @@ void Game::draw_button_Work(){
   window->draw(sprite);
 }
 void Game::draw_button_Cure(){
-  float const X=0;
-  float const Y=0;
+  float const X=750;
+  float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("Cure.jpg");
+  texture.loadFromFile("res/cure_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -426,11 +439,11 @@ void Game::draw_button_Cure(){
   window->draw(sprite);
 }
 void Game::draw_button_placebo(){
-  float const X=0;
-  float const Y=0;
+  float const X=350;
+  float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("placebo.jpg");
+  texture.loadFromFile("res/placebo_resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);

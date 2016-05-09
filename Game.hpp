@@ -17,22 +17,22 @@ class Game {
     Pet mycat_;
     sf::RenderWindow* window;
 
-    static constexpr float  BUTTON_SHOWER_X = 0;
-    float const BUTTON_SHOWER_Y = 0;
-    float const BUTTON_FOOD_X = 0;
-    float const BUTTON_FOOD_Y = 0;
-    float const BUTTON_WC_X = 0;
-    float const BUTTON_WC_Y = 0;
-    float const BUTTON_GAME_X = 0;
-    float const BUTTON_GAME_Y = 0;
-    float const BUTTON_SPORT_X = 0;
-    float const BUTTON_SPORT_Y = 0;
-    float const BUTTON_WORK_X = 0;
-    float const BUTTON_WORK_Y = 0;
-    float const BUTTON_CURE_X = 0;
-    float const BUTTON_CURE_Y = 0;
-    float const BUTTON_PLACEBO_X = 0;
-    float const BUTTON_PLACEBO_Y = 0;
+    float const BUTTON_SHOWER_X = 550;
+    float const BUTTON_SHOWER_Y = 600;
+    float const BUTTON_FOOD_X = 150;
+    float const BUTTON_FOOD_Y = 600;
+    float const BUTTON_WC_X = 350;
+    float const BUTTON_WC_Y = 600;
+    float const BUTTON_GAME_X = 550;
+    float const BUTTON_GAME_Y = 750;
+    float const BUTTON_SPORT_X = 750;
+    float const BUTTON_SPORT_Y = 600;
+    float const BUTTON_WORK_X = 150;
+    float const BUTTON_WORK_Y = 750;
+    float const BUTTON_CURE_X = 750;
+    float const BUTTON_CURE_Y = 750;
+    float const BUTTON_PLACEBO_X = 350;
+    float const BUTTON_PLACEBO_Y = 750;
 
     void draw_button_placebo();
     void draw_button_shower();

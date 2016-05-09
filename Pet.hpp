@@ -1,10 +1,13 @@
 #include <string>
 
 using namespace std;
-class Pet{
+
+class Pet {
 
 public:
+
   Pet(string name);
+  string condition_;
   void shower();
   void food() ;
   void WC();
@@ -31,5 +34,5 @@ protected:
   int hygiene = DEFAULT_VALUE;
   int health = DEFAULT_VALUE;
   string  name;
-  string condition_;
+
 };
