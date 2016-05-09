@@ -61,7 +61,7 @@
 	}
 
 	string Pet::condition() {
-    if (health <50) return condition_="ill";
+    if (health <20) return condition_="ill";
     if (happiness>90) return condition_="happy";
     if (happiness>70&&happiness<90) return condition_="good";
     if (happiness>50&&happiness<70) return condition_="soso";
@@ -102,7 +102,7 @@
 
 	void Pet::Action(string tmp)
 	{
-		if (tmp == "feed") food();
+		if (tmp == "food") food();
 		if (tmp == "wc") WC();
 		if (tmp == "sport") Sport();
 		if (tmp == "work") Work();

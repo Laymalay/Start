@@ -29,15 +29,15 @@ void Game::control() {
           window->close();
       if (event.type == sf::Event::MouseButtonPressed){
           float x,y;
-          float const widht=10;
-          float const hight=10;
+          float const widht=100;
+          float const hight=100;
           x=event.mouseButton.x;
           y=event.mouseButton.y;
           //смотрит входит ли нажатие в область кнопки
           if (BUTTON_SHOWER_X<x&&BUTTON_SHOWER_X+widht>x
           &&BUTTON_SHOWER_Y<y&&BUTTON_SHOWER_Y+hight>y)
           {
-            mycat_.Action("shower");mycat_.condition_="shower";//действие
+            mycat_.Action("shower");//действие
           }
 
           if (BUTTON_FOOD_X<x&&BUTTON_FOOD_X+widht>x
@@ -53,7 +53,7 @@ void Game::control() {
           if (BUTTON_GAME_X<x&&BUTTON_GAME_X+widht>x
           &&BUTTON_GAME_Y<y&&BUTTON_GAME_Y+hight>y)
           {
-            mycat_.Action("game");    //действие
+            mycat_.Action("play");    //действие
           }
           if (BUTTON_SPORT_X<x&&BUTTON_SPORT_X+widht>x
           &&BUTTON_SPORT_Y<y&&BUTTON_SPORT_Y+hight>y)
@@ -83,7 +83,7 @@ void Game::control() {
 }
 void Game::update() {
     mycat_.change_over(5);
-    sleep(1);
+    sleep(1 );
 
 }
 
@@ -267,7 +267,7 @@ void Game::work(){
   float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("res/Workresize.jpg");
+  texture.loadFromFile("res/work__resize.jpg");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
