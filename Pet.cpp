@@ -1,10 +1,11 @@
-  #include "Pet.hpp"
+ #include "Pet.hpp"
 
+ using namespace std;
 
- 
 		Pet::Pet( string name) {}
 	void Pet::shower() {
 			hygiene = 100;
+      condition_="shower";
 
 		}
 	void Pet::food() {
@@ -12,10 +13,12 @@
 		need += 10;
 		happiness += 20;
 		hygiene -= 5;
+    condition_="eat";
 
 	}
 	void Pet::WC() {
 		need = 0;
+    condition_="wc";
   }
 	void Pet::Game() {
 		leisure += 30;
@@ -23,36 +26,48 @@
 		need += 5;
 		happiness += 20;
 		hygiene -= 20;
-
-
+    condition_="play";
 	}
-	//add level (such as sport master )
+
 	void Pet::Sport() {
 		leisure += 5;
 		eating -= 30;
 		need += 20;
 		happiness += 10;
 		hygiene -= 30;
+   condition_="sport";
 
 	}
-	//add level (such as good proprogrammer )
+
 	void Pet::Work() {
 		leisure -= 20;
 		eating -= 30;
 		need += 10;
 		happiness -= 10;
 		hygiene -= 5;
+    condition_="work";
 
 	}
 	void Pet::Cure() {
-		health = 100;
-
+		happiness= 100;
+    condition_="cure";
 	}
+  void Pet::placebo(){
+    health=100;
+    condition_="happy";
+  }
 	void Pet::get_name() {
-
 	}
-	void Pet::show_condition() {
 
+	string Pet::condition() {
+    if (health <50) return condition_="ill";
+    if (happiness>90) return condition_="happy";
+    if (happiness>70&&happiness<90) return condition_="good";
+    if (happiness>50&&happiness<70) return condition_="soso";
+    if (happiness>30&&happiness<50) return condition_="sad";
+    if (happiness>15&&happiness<30) return condition_="verysad";
+    if (eating==0&&health==0&&happiness==0) return condition_="died";
+    else return "error";
 	}
 
 
@@ -90,8 +105,7 @@
 		if (tmp == "sport") Sport();
 		if (tmp == "work") Work();
 		if (tmp == "play") Game();
-		if (tmp == "check") CheckAll();
 		if (tmp == "cure")  Cure();
-
 		if (tmp == "shower") shower();
+    if (tmp == "placebo") placebo();
 	}
