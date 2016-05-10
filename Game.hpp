@@ -42,6 +42,7 @@ class Game {
     void draw_button_Sport();
     void draw_button_Work();
     void draw_button_Cure();
+    void draw_background();
 
     //////////////////////////////////////////
     //              Condition               //

@@ -82,8 +82,8 @@ void Game::control() {
   }
 }
 void Game::update() {
-    mycat_.change_over(5);
-    sleep(1 );
+    mycat_.change_over(1);
+    sleep(1);
 
 }
 
@@ -101,6 +101,53 @@ void Game::render() {
   Game::draw_button_Cure();
   Game::draw_button_Game();
   Game::show_condition(mycat_.condition_);
+
+  mycat_.ControlProp();
+  std::string eating_str = std::to_string(mycat_.eating);
+  std::string leisure_str = std::to_string(mycat_.leisure);
+  std::string need_str = std::to_string(mycat_.need);
+  std::string happiness_str = std::to_string(mycat_.happiness);
+  std::string hygiene_str = std::to_string(mycat_.hygiene);
+  std::string health_str = std::to_string(mycat_.health);
+
+
+  sf::Font font;
+  sf::Text text;
+  font.loadFromFile("res/GoodDog.otf");
+  text.setFont(font);
+  text.setCharacterSize(50);
+
+  text.setString("eating-->"+eating_str);
+  text.setPosition (10,0);
+  text.setColor(sf::Color::Red);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("leisure-->"+leisure_str);
+  text.setPosition (10,50);
+  text.setColor(sf::Color::Yellow);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("need-->"+need_str);
+  text.setPosition (10,100);
+  text.setColor(sf::Color::Blue);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("happiness-->"+happiness_str);
+  text.setPosition (10,150);
+  text.setColor(sf::Color::Cyan);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("hygiene-->"+hygiene_str);
+  text.setPosition (10,200);
+  text.setColor(sf::Color::Green);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("health-->"+health_str);
+  text.setPosition (10,250);
+  text.setColor(sf::Color::Magenta);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+
   window->display();
 
 }
@@ -439,6 +486,18 @@ void Game::draw_button_Cure(){
   window->draw(sprite);
 }
 void Game::draw_button_placebo(){
+  float const X=350;
+  float const Y=750;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/placebo_resize.jpg");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+}
+void Game::draw_background(){
   float const X=350;
   float const Y=750;
 

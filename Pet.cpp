@@ -89,12 +89,13 @@
 
 
 	void 	Pet::change_over(int value) {
-			eating -= value;
+
+      eating -= value;
 			leisure -= value;
 			need += value;
 			happiness -= value;
 		    hygiene -= value;
-			health -= 5;
+			health -= 1;
 			ControlProp();
       condition();
 

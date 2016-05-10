@@ -24,8 +24,6 @@ public:
   void change_over(int value) ;
   string condition();
   void Action(string tmp);
-protected:
-  static const int DEFAULT_VALUE=100;
 
   int eating = DEFAULT_VALUE;
   int leisure = DEFAULT_VALUE;
@@ -33,6 +31,9 @@ protected:
   int happiness = DEFAULT_VALUE;
   int hygiene = DEFAULT_VALUE;
   int health = DEFAULT_VALUE;
+
+protected:
+  static const int DEFAULT_VALUE=100;
   string  name;
 
 };
