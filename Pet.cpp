@@ -6,6 +6,7 @@
 
 	void Pet::shower() {
 			hygiene = 100;
+      happiness += 5;
       condition_="shower";
 
 		}
@@ -19,6 +20,7 @@
 	}
 	void Pet::WC() {
 		need = 0;
+    happiness += 5;
     condition_="wc";
   }
 	void Pet::Game() {
@@ -55,19 +57,20 @@
 	}
   void Pet::placebo(){
     health=100;
+    happiness+=30;
     condition_="happy";
   }
 	void Pet::get_name() {
 	}
 
 	string Pet::condition() {
+    if (eating<0.5&&health<0.5&&happiness<05) return condition_="died";
     if (health <20) return condition_="ill";
     if (happiness>90) return condition_="happy";
     if (happiness>70&&happiness<90) return condition_="good";
     if (happiness>50&&happiness<70) return condition_="soso";
     if (happiness>30&&happiness<50) return condition_="sad";
     if (happiness>15&&happiness<30) return condition_="verysad";
-    if (eating==0&&health==0&&happiness==0) return condition_="died";
     else return "error";
 	}
 
@@ -94,8 +97,11 @@
 			leisure -= value;
 			need += value;
 			happiness -= value;
-		    hygiene -= value;
+		  hygiene -= value;
 			health -= 1;
+
+
+
 			ControlProp();
       condition();
 
