@@ -8,6 +8,7 @@ public:
 
   Pet(string name);
   string condition_;
+  string thoughts_;
   void shower();
   void food() ;
   void WC();
@@ -23,6 +24,7 @@ public:
 
   void change_over(int value) ;
   string condition();
+  string thoughts();
   void Action(string tmp);
 
   int eating = DEFAULT_VALUE;

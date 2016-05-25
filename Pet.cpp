@@ -2,7 +2,7 @@
 
  using namespace std;
 
-		Pet::Pet( string name) {condition_="happy";}
+		Pet::Pet( string name) {condition_="happy"; thoughts_="ok";}
 
 	void Pet::shower() {
 			hygiene = 100;
@@ -73,6 +73,13 @@
     if (happiness>15&&happiness<30) return condition_="verysad";
     else return "error";
 	}
+  string Pet::thoughts(){
+    if (eating < 50) return thoughts_="hungry";
+    if (need > 50) return thoughts_="need_wc";
+    if (happiness < 60 ) return thoughts_="need_cure";
+    if (hygiene < 50) return thoughts_="need_shower";
+    else return thoughts_="ok";
+  }
 
 
 	int Pet::property_of_condition(int &condition) {
@@ -100,10 +107,9 @@
 		  hygiene -= value;
 			health -= 1;
 
-
-
 			ControlProp();
       condition();
+      thoughts();
 
 		}
 

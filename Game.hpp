@@ -48,6 +48,7 @@ class Game {
     //              Condition               //
     //////////////////////////////////////////
     void show_condition(string condition);
+    void show_thoughts(string thoughts);
     void happy();
     void good();
     void so_so();
@@ -59,10 +60,11 @@ class Game {
     //                мысли                 //
     //////////////////////////////////////////
     void Cloud();
-
+    void need_shower();
     void hungry();
     void need_wc();
     void need_cure();
+    void ok();
 
     //////////////////////////////////////////
     //              ACTION                  //

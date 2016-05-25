@@ -101,7 +101,10 @@ void Game::render() {
   Game::draw_button_placebo();
   Game::draw_button_Cure();
   Game::draw_button_Game();
+  Game::Cloud();
   Game::show_condition(mycat_.condition_);
+  Game::show_thoughts(mycat_.thoughts_);
+
 
   mycat_.ControlProp();
   std::string eating_str = std::to_string(mycat_.eating);
@@ -149,10 +152,17 @@ void Game::render() {
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
   text.setString("condition-->"+mycat_.condition_);
-  text.setPosition (550,50);
+  text.setPosition (700,300);
   text.setColor(sf::Color::Magenta);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
+  text.setString("thoughts_-->"+mycat_.thoughts_);
+  text.setPosition (700,350);
+  text.setColor(sf::Color::Magenta);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+
+
 
   window->display();
 
@@ -171,13 +181,20 @@ void Game::show_condition (string condition_){
   if (condition_ == "sad") Game::sad();
   if (condition_ == "verysad") Game::verysad();
   if (condition_ == "died") Game::died();
-  if (condition_ =="eat") Game::eat();
-  if (condition_ =="wc") Game::wc();
-  if (condition_ =="sport") Game::sport();
-  if (condition_ =="shower") Game::shower();
-  if (condition_ =="work") Game::work();
-  if (condition_ =="play") Game::play();
-  if (condition_ =="cure") Game::cure();
+  if (condition_ == "eat") Game::eat();
+  if (condition_ == "wc") Game::wc();
+  if (condition_ == "sport") Game::sport();
+  if (condition_ == "shower") Game::shower();
+  if (condition_ == "work") Game::work();
+  if (condition_ == "play") Game::play();
+  if (condition_ == "cure") Game::cure();
+}
+void Game::show_thoughts(string thoughts){
+  if (thoughts == "need_wc") Game::need_wc();
+  if (thoughts == "hungry") Game::hungry();
+  if (thoughts == "need_cure") Game::need_cure();
+  if (thoughts == "need_shower") Game::need_shower();
+  if (thoughts == "ok") Game::ok();
 }
 void Game::happy(){
   float const X=300;
@@ -196,7 +213,7 @@ void Game::good(){
   float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("res/good.jpg");
+  texture.loadFromFile("res/thank.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -332,7 +349,7 @@ void Game::play(){
   float const Y=150;
 
   sf::Texture texture;
-  texture.loadFromFile("res/play.jpg");
+  texture.loadFromFile("res/play_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -356,11 +373,23 @@ void Game::cure(){
 //              CLOUD                   //
 //////////////////////////////////////////
 void Game::Cloud(){
-  float const X=0;
+  float const X=520;
   float const Y=0;
 
   sf::Texture texture;
-  texture.loadFromFile("res/sad_.jpg");
+  texture.loadFromFile("res/cloud.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+}
+void Game::ok(){
+  float const X=700;
+  float const Y=50;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/yea.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -368,11 +397,11 @@ void Game::Cloud(){
   window->draw(sprite);
 }
 void Game::hungry(){
-  float const X=0;
-  float const Y=0;
+  float const X=700;
+  float const Y=50;
 
   sf::Texture texture;
-  texture.loadFromFile("res/hungry_.jpg");
+  texture.loadFromFile("res/hungry_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -380,11 +409,11 @@ void Game::hungry(){
   window->draw(sprite);
 }
 void Game::need_wc(){
-  float const X=0;
-  float const Y=0;
+  float const X=730;
+  float const Y=50;
 
   sf::Texture texture;
-  texture.loadFromFile("res/need_wc_.jpg");
+  texture.loadFromFile("res/wc_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -392,11 +421,23 @@ void Game::need_wc(){
   window->draw(sprite);
 }
 void Game::need_cure(){
-  float const X=0;
-  float const Y=0;
+  float const X=700;
+  float const Y=50;
 
   sf::Texture texture;
-  texture.loadFromFile("res/need_cure_.jpg");
+  texture.loadFromFile("res/need_cure.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+}
+void Game::need_shower(){
+  float const X=700;
+  float const Y=50;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/need_shower.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -412,7 +453,7 @@ void Game::draw_button_shower(){
   float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("res/shower_.jpg");
+  texture.loadFromFile("res/shower_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -424,7 +465,7 @@ void Game::draw_button_food(){
   float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("res/food_.jpg");
+  texture.loadFromFile("res/food_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -436,7 +477,7 @@ void Game::draw_button_WC(){
   float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("res/wc_.jpg");
+  texture.loadFromFile("res/wc_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -448,7 +489,7 @@ void Game::draw_button_Game(){
   float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("res/game_.jpg");
+  texture.loadFromFile("res/game_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -460,7 +501,7 @@ void Game::draw_button_Sport(){
   float const Y=600;
 
   sf::Texture texture;
-  texture.loadFromFile("res/sport_.jpg");
+  texture.loadFromFile("res/sport_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -472,7 +513,7 @@ void Game::draw_button_Work(){
   float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("res/work_.jpg");
+  texture.loadFromFile("res/work_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -484,7 +525,7 @@ void Game::draw_button_Cure(){
   float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("res/cure_.jpg");
+  texture.loadFromFile("res/cure_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -496,7 +537,7 @@ void Game::draw_button_placebo(){
   float const Y=750;
 
   sf::Texture texture;
-  texture.loadFromFile("res/placebo_.jpg");
+  texture.loadFromFile("res/placebo_.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
