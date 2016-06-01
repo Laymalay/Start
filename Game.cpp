@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Game.hpp"
 #include <unistd.h>
 using namespace std;
@@ -7,26 +8,161 @@ Game::Game(float widht,float hight, string name): mycat_(name){
 
    window = new sf::RenderWindow(sf::VideoMode(widht,hight),
     "tamagotchi");
+
+
 };
 
-void Game::start(){
+
+
+void Game::menu(){
+
+  sf::Music music;
+  if (!music.openFromFile("res/music_menu.ogg")){
+     window->close();} // error
+
+     music.setVolume(50);         // reduce the volume
+     music.setLoop(true);
+  music.play();
+
   while(1){
+  window->clear(sf::Color::White);
 
-    Game::render();
-    Game::update();
-    Game::control();
 
+  Game::draw_background_menu();
+  Game::draw_button_start();
+  Game::draw_button_info();
+  Game::draw_button_exit();
+
+  sf::Font font;
+  sf::Text text;
+
+  font.loadFromFile("res/GoodDog.otf");
+  text.setFont(font);
+  text.setCharacterSize(70);
+
+  text.setString("START");
+  text.setPosition (400,202);
+  text.setColor(sf::Color::Yellow);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("EXIT");
+  text.setPosition (400,402);
+  text.setColor(sf::Color::Black);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  text.setString("INFO");
+  text.setPosition (400,602);
+  text.setColor(sf::Color::Magenta);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
+  window->display();
+  sf::Event event;
+
+  while (window->pollEvent(event))
+  {
+    if (event.type == sf::Event::Closed){
+          button_sound();
+          music.stop();
+        window->close();
+      }
+    if (event.type == sf::Event::MouseButtonPressed){
+        float x,y;
+        float const widht=400;
+        float const hight=100;
+        x=event.mouseButton.x;
+        y=event.mouseButton.y;
+        //смотрит входит ли нажатие в область кнопки
+        if (BUTTON_START_X<x&&BUTTON_START_X+widht>x
+        &&BUTTON_START_Y<y&&BUTTON_START_Y+hight>y)
+        {
+          button_sound();
+          music.stop();
+          start();
+        }
+        if (BUTTON_INFO_X<x&&BUTTON_INFO_X+widht>x
+        &&BUTTON_INFO_Y<y&&BUTTON_INFO_Y+hight>y)
+        {
+
+          while(1){
+            window->clear(sf::Color::White);
+            Game::draw_background_info();
+            Game::draw_button_back();
+            sf::Font font;
+            sf::Text text;
+
+            font.loadFromFile("res/GoodDog.otf");
+            text.setFont(font);
+            text.setCharacterSize(70);
+
+            text.setString("BACK");
+            text.setPosition (400,602);
+            text.setColor(sf::Color::Yellow);
+            text.setStyle(sf::Text::Bold | sf::Text::Italic);
+            window->draw(text);
+            window->display();
+            sf::Event event;
+            while (window->pollEvent(event)){
+              if (event.type == sf::Event::Closed){
+                music.stop();
+                window->close();
+              }
+                if (event.type == sf::Event::MouseButtonPressed){
+                    float x,y;
+                    float const widht=400;
+                    float const hight=100;
+                    x=event.mouseButton.x;
+                    y=event.mouseButton.y;
+                    if (BUTTON_BACK_X<x&&BUTTON_BACK_X+widht>x
+                    &&BUTTON_BACK_Y<y&&BUTTON_BACK_Y+hight>y)
+                    {
+                      button_sound();
+                      music.stop();
+                      menu();
+                    }
+                  }
+             }
+        }
+        }
+        if (BUTTON_EXIT_X<x&&BUTTON_EXIT_X+widht>x
+        &&BUTTON_EXIT_Y<y&&BUTTON_EXIT_Y+hight>y)
+        {
+            button_sound();
+          music.stop();
+          window->close();
+        }
 
   }
 }
+}
+}
+void Game::start(){
+  sf::Music music;
+  if (!music.openFromFile("res/bcg.ogg")){
+     window->close();
+   } // error
 
+  music.setVolume(50);         // reduce the volume
+  music.setLoop(true);
+  music.play();
+
+  while(1){
+    Game::render();
+    Game::update();
+    Game::control();
+  }
+
+}
 void Game::control() {
 
   sf::Event event;
+
+
   while (window->pollEvent(event))
   {
-      if (event.type == sf::Event::Closed)
+      if (event.type == sf::Event::Closed){
+
           window->close();
+        }
       if (event.type == sf::Event::MouseButtonPressed){
           float x,y;
           float const widht=100;
@@ -37,7 +173,14 @@ void Game::control() {
           if (BUTTON_SHOWER_X<x&&BUTTON_SHOWER_X+widht>x
           &&BUTTON_SHOWER_Y<y&&BUTTON_SHOWER_Y+hight>y)
           {
+            /*sf::SoundBuffer Buffer;
+            Buffer.loadFromFile("bathroom-sink.wav");
+            sf::Sound Sound;
+            Sound.setBuffer(Buffer);
+            Sound.play();
+            Sound.stop();*/
             mycat_.Action("shower");//действие
+
           }
 
           if (BUTTON_FOOD_X<x&&BUTTON_FOOD_X+widht>x
@@ -75,6 +218,12 @@ void Game::control() {
           {
             mycat_.Action("placebo");
           }
+          if (BUTTON_X<x&&BUTTON_X+400>x
+          &&BUTTON_Y<y&&BUTTON_Y+100>y)
+          {
+
+            window->close();
+          }
 
          }
 
@@ -83,7 +232,7 @@ void Game::control() {
 }
 void Game::update() {
     mycat_.change_over(1);
-    sleep(2);
+    sleep(1);
 
 }
 
@@ -101,6 +250,7 @@ void Game::render() {
   Game::draw_button_placebo();
   Game::draw_button_Cure();
   Game::draw_button_Game();
+  Game::draw_button();
   Game::Cloud();
   Game::show_condition(mycat_.condition_);
   Game::show_thoughts(mycat_.thoughts_);
@@ -152,18 +302,21 @@ void Game::render() {
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
   text.setString("condition-->"+mycat_.condition_);
-  text.setPosition (700,300);
+  text.setPosition (670,300);
   text.setColor(sf::Color::Magenta);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
   text.setString("thoughts_-->"+mycat_.thoughts_);
-  text.setPosition (700,350);
-  text.setColor(sf::Color::Magenta);
+  text.setPosition (670,350);
+  text.setColor(sf::Color::White);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-
-
-
+  text.setCharacterSize(70);
+  text.setString("EXIT");
+  text.setPosition (400,902);
+  text.setColor(sf::Color::Black);
+  text.setStyle(sf::Text::Bold | sf::Text::Italic);
+  window->draw(text);
   window->display();
 
 }
@@ -556,3 +709,98 @@ void Game::draw_background(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
+void Game::draw_background_menu(){
+  float const X=0;
+  float const Y=0;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/menu.jpg");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+};
+void Game::draw_background_info(){
+  float const X=0;
+  float const Y=0;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/info_bcg.jpg");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+};
+void Game::draw_button_start(){
+  float const X=300;
+  float const Y=200;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/button.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+
+};
+void Game::draw_button_exit(){
+  float const X=300;
+  float const Y=400;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/button.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+};
+void Game::draw_button_info(){
+  float const X=300;
+  float const Y=600;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/button.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+};
+void Game::draw_button_back(){
+  float const X=300;
+  float const Y=600;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/button.png");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);}
+  void Game::draw_button(){
+    float const X=300;
+    float const Y=900;
+
+    sf::Texture texture;
+    texture.loadFromFile("res/button.png");
+
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(X,Y);
+    window->draw(sprite);}
+void Game::button_sound(){
+  sf::SoundBuffer Buffer;
+  if (!Buffer.loadFromFile("1405.wav"))
+  {
+    window->close();
+  }
+  sf::Sound Sound;
+Sound.setBuffer(Buffer);
+Sound.play();
+Sound.stop();
+
+};

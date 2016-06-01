@@ -8,7 +8,6 @@
 			hygiene = 100;
       happiness += 5;
       condition_="shower";
-
 		}
 	void Pet::food() {
 		eating += 40;
@@ -49,6 +48,7 @@
 		happiness -= 10;
 		hygiene -= 5;
     condition_="work";
+
 
 	}
 	void Pet::Cure() {
