@@ -16,6 +16,7 @@
 		hygiene -= 5;
     condition_="eat";
 
+
 	}
 	void Pet::WC() {
 		need = 0;

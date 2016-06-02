@@ -2,7 +2,10 @@
 #include <SFML/Audio.hpp>
 #include "Pet.hpp"
 #include <string>
+#include <ctime>
 using namespace std;
+
+
 
 
 class Game {
@@ -15,10 +18,29 @@ class Game {
     void control();
     void render();
     void update();
+    void over();
+
+
   private:
     Pet mycat_;
     sf::RenderWindow* window;
+    sf::SoundBuffer buttonSoundBuffer;
+    sf::Sound buttonSound;
+    sf::Music music;
 
+    sf::SoundBuffer ShowerBuffer;
+    sf::Sound ShowerSound;
+
+    sf::SoundBuffer CureBuffer;
+    sf::Sound CureSound;
+
+    sf::SoundBuffer WorkBuffer;
+    sf::Sound WorkSound;
+
+    sf::SoundBuffer GameBuffer;
+    sf::Sound GameSound;
+
+    int sshower=0,scure=0,swork=0,sgame=0;
     float const BUTTON_X = 300;
     float const BUTTON_Y = 900;
 
@@ -58,7 +80,7 @@ class Game {
 
     float const BUTTON_PLACEBO_X = 350;
     float const BUTTON_PLACEBO_Y = 750;
-    void button_sound();
+
     void draw_button_placebo();
     void draw_button_shower();
     void draw_button_food();
@@ -70,6 +92,7 @@ class Game {
     void draw_background();
     void draw_background_menu();
     void draw_background_info();
+    void draw_background_over();
     void draw_button_start();
     void draw_button_exit();
     void draw_button_info();

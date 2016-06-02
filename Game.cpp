@@ -3,12 +3,28 @@
 #include "Game.hpp"
 #include <unistd.h>
 using namespace std;
+#define true 1
+#define false 0
+
+
+
+
 
 Game::Game(float widht,float hight, string name): mycat_(name){
 
    window = new sf::RenderWindow(sf::VideoMode(widht,hight),
     "tamagotchi");
-
+   buttonSoundBuffer.loadFromFile("res/1405.wav");
+   buttonSound.setBuffer(buttonSoundBuffer);
+   music.openFromFile("res/bcg.ogg");
+   ShowerBuffer.loadFromFile("res/bathroom-sink.wav");
+   ShowerSound.setBuffer(ShowerBuffer);
+   CureBuffer.loadFromFile("res/rrr.wav");
+   CureSound.setBuffer(CureBuffer);
+   WorkBuffer.loadFromFile("res/miau02.wav");
+   WorkSound.setBuffer(WorkBuffer);
+   GameBuffer.loadFromFile("res/miau01.wav");
+   GameSound.setBuffer(GameBuffer);
 
 };
 
@@ -16,13 +32,14 @@ Game::Game(float widht,float hight, string name): mycat_(name){
 
 void Game::menu(){
 
+
   sf::Music music;
   if (!music.openFromFile("res/music_menu.ogg")){
      window->close();} // error
 
      music.setVolume(50);         // reduce the volume
      music.setLoop(true);
-  music.play();
+     music.play();
 
   while(1){
   window->clear(sf::Color::White);
@@ -61,7 +78,7 @@ void Game::menu(){
   while (window->pollEvent(event))
   {
     if (event.type == sf::Event::Closed){
-          button_sound();
+
           music.stop();
         window->close();
       }
@@ -75,14 +92,14 @@ void Game::menu(){
         if (BUTTON_START_X<x&&BUTTON_START_X+widht>x
         &&BUTTON_START_Y<y&&BUTTON_START_Y+hight>y)
         {
-          button_sound();
+          buttonSound.play();
           music.stop();
           start();
         }
         if (BUTTON_INFO_X<x&&BUTTON_INFO_X+widht>x
         &&BUTTON_INFO_Y<y&&BUTTON_INFO_Y+hight>y)
         {
-
+          buttonSound.play();
           while(1){
             window->clear(sf::Color::White);
             Game::draw_background_info();
@@ -99,6 +116,21 @@ void Game::menu(){
             text.setColor(sf::Color::Yellow);
             text.setStyle(sf::Text::Bold | sf::Text::Italic);
             window->draw(text);
+
+            text.setCharacterSize(100);
+            text.setString("Hi");
+            text.setPosition (250,50);
+            text.setColor(sf::Color::Blue);
+            text.setStyle(sf::Text::Bold | sf::Text::Italic);
+            window->draw(text);
+
+            text.setCharacterSize(100);
+            text.setString("Love me,\n   feed me,\n   never leave me.");
+            text.setPosition (250,150);
+            text.setColor(sf::Color::Magenta);
+            text.setStyle(sf::Text::Bold | sf::Text::Italic);
+            window->draw(text);
+
             window->display();
             sf::Event event;
             while (window->pollEvent(event)){
@@ -115,7 +147,7 @@ void Game::menu(){
                     if (BUTTON_BACK_X<x&&BUTTON_BACK_X+widht>x
                     &&BUTTON_BACK_Y<y&&BUTTON_BACK_Y+hight>y)
                     {
-                      button_sound();
+                      buttonSound.play();
                       music.stop();
                       menu();
                     }
@@ -126,7 +158,7 @@ void Game::menu(){
         if (BUTTON_EXIT_X<x&&BUTTON_EXIT_X+widht>x
         &&BUTTON_EXIT_Y<y&&BUTTON_EXIT_Y+hight>y)
         {
-            button_sound();
+           buttonSound.play();
           music.stop();
           window->close();
         }
@@ -136,11 +168,7 @@ void Game::menu(){
 }
 }
 void Game::start(){
-  sf::Music music;
-  if (!music.openFromFile("res/bcg.ogg")){
-     window->close();
-   } // error
-
+ buttonSound.setVolume(50);
   music.setVolume(50);         // reduce the volume
   music.setLoop(true);
   music.play();
@@ -160,7 +188,7 @@ void Game::control() {
   while (window->pollEvent(event))
   {
       if (event.type == sf::Event::Closed){
-
+           music.stop();
           window->close();
         }
       if (event.type == sf::Event::MouseButtonPressed){
@@ -173,55 +201,53 @@ void Game::control() {
           if (BUTTON_SHOWER_X<x&&BUTTON_SHOWER_X+widht>x
           &&BUTTON_SHOWER_Y<y&&BUTTON_SHOWER_Y+hight>y)
           {
-            /*sf::SoundBuffer Buffer;
-            Buffer.loadFromFile("bathroom-sink.wav");
-            sf::Sound Sound;
-            Sound.setBuffer(Buffer);
-            Sound.play();
-            Sound.stop();*/
+            buttonSound.play();
+            sshower=true;
             mycat_.Action("shower");//действие
-
           }
 
           if (BUTTON_FOOD_X<x&&BUTTON_FOOD_X+widht>x
           &&BUTTON_FOOD_Y<y&&BUTTON_FOOD_Y+hight>y)
-          {
+          {buttonSound.play();
             mycat_.Action("food");//действие
           }
           if (BUTTON_WC_X<x&&BUTTON_WC_X+widht>x
           &&BUTTON_WC_Y<y&&BUTTON_WC_Y+hight>y)
-          {
+          {buttonSound.play();
             mycat_.Action("wc");//действие
           }
           if (BUTTON_GAME_X<x&&BUTTON_GAME_X+widht>x
           &&BUTTON_GAME_Y<y&&BUTTON_GAME_Y+hight>y)
-          {
+          {buttonSound.play();
+            sgame=true;
             mycat_.Action("play");    //действие
           }
           if (BUTTON_SPORT_X<x&&BUTTON_SPORT_X+widht>x
           &&BUTTON_SPORT_Y<y&&BUTTON_SPORT_Y+hight>y)
-          {
+          {buttonSound.play();
             mycat_.Action("sport");//действие
           }
           if (BUTTON_WORK_X<x&&BUTTON_WORK_X+widht>x
           &&BUTTON_WORK_Y<y&&BUTTON_WORK_Y+hight>y)
-          {
+          {buttonSound.play();
+            swork=true;
             mycat_.Action("work");//действие
           }
           if (BUTTON_CURE_X<x&&BUTTON_CURE_X+widht>x
           &&BUTTON_CURE_Y<y&&BUTTON_CURE_Y+hight>y)
-          {
+          {buttonSound.play();
             mycat_.Action("cure");//действие
+            scure=true;
           }
           if (BUTTON_PLACEBO_X<x&&BUTTON_PLACEBO_X+widht>x
           &&BUTTON_PLACEBO_Y<y&&BUTTON_PLACEBO_Y+hight>y)
-          {
+          {buttonSound.play();
             mycat_.Action("placebo");
           }
           if (BUTTON_X<x&&BUTTON_X+400>x
           &&BUTTON_Y<y&&BUTTON_Y+100>y)
-          {
-
+          {buttonSound.play();
+            music.stop();
             window->close();
           }
 
@@ -230,11 +256,111 @@ void Game::control() {
 
   }
 }
-void Game::update() {
-    mycat_.change_over(1);
-    sleep(1);
+void Game::update()
+ {
+     /*static int deltaTime = 0, prev = 0;
+      int now = clock();
+      deltaTime += now - prev;
+      prev = now;
+      if (deltaTime > 1000000) {
+      mycat_.change_over(1);
+      deltaTime = 0;
+    }*/
+    if (mycat_.condition_=="died"){
+      music.stop();
+      over();
+    }
+    if (sshower) {
+      ShowerSound.setPitch (1);
+      ShowerSound.play();
+      sleep(2);
+      ShowerSound.stop();
+      sshower=false;
+    }
+    if (scure){
+      CureSound.setPitch (1);
+      CureSound.play();
+      sleep(2);
+      CureSound.stop();
+      scure=false;
+    }
+    if (swork){
+      WorkSound.setPitch (1);
+      WorkSound.play();
+      sleep(2);
+      WorkSound.stop();
+      swork=false;
+    }
+    if (sgame){
+      GameSound.setPitch (1);
+      GameSound.play();
+      sleep(2);
+      GameSound.stop();
+      sgame=false;
+    }
+
+      mycat_.change_over(1);
+      sleep(1);
 
 }
+void Game::over(){
+  sf::Music music;
+  if (!music.openFromFile("res/over.ogg")){
+     window->close();} // error
+     music.setVolume(50);         // reduce the volume
+     music.setLoop(true);
+     music.play();
+  while(1){
+   window->clear(sf::Color::Black);
+   Game::draw_background_over();
+    Game::draw_button();
+      sf::Font font;
+      sf::Text text;
+      font.loadFromFile("res/GoodDog.otf");
+      text.setFont(font);
+    text.setCharacterSize(70);
+    text.setString("EXIT");
+    text.setPosition (420,902);
+    text.setColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold | sf::Text::Italic);
+    window->draw(text);
+    text.setCharacterSize(150);
+    text.setString("GAME OVER");
+    text.setPosition (240,20);
+    text.setColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold | sf::Text::Italic);
+    window->draw(text);
+    died();
+    window->display();
+
+  sf::Event event;
+
+  while (window->pollEvent(event))
+  {
+    if (event.type == sf::Event::Closed){
+          music.stop();
+        window->close();
+      }
+    if (event.type == sf::Event::MouseButtonPressed){
+        float x,y;
+        float const widht=400;
+        float const hight=100;
+        x=event.mouseButton.x;
+        y=event.mouseButton.y;
+
+        if (BUTTON_X<x&&BUTTON_X+widht>x
+        &&BUTTON_Y<y&&BUTTON_Y+hight>y)
+        {
+           buttonSound.play();
+          music.stop();
+          window->close();
+        }
+
+    }
+}
+}
+}
+
 
 //////////////////////////////////////////
 //     ОТОБРАЖЕНИЕ ВСЕГО НА ЭКРАНЕ      //
@@ -341,6 +467,8 @@ void Game::show_condition (string condition_){
   if (condition_ == "work") Game::work();
   if (condition_ == "play") Game::play();
   if (condition_ == "cure") Game::cure();
+
+
 }
 void Game::show_thoughts(string thoughts){
   if (thoughts == "need_wc") Game::need_wc();
@@ -422,11 +550,11 @@ void Game::ill(){
   window->draw(sprite);
 }
 void Game::died(){
-  float const X=300;
-  float const Y=150;
+  float const X=235;
+  float const Y=200;
 
   sf::Texture texture;
-  texture.loadFromFile("res/died.png");
+  texture.loadFromFile("res/rip.png");
 
   sf::Sprite sprite;
   sprite.setTexture(texture);
@@ -484,6 +612,9 @@ void Game::shower(){
   sprite.setTexture(texture);
   sprite.setPosition(X,Y);
   window->draw(sprite);
+
+
+
 }
 void Game::work(){
   float const X=300;
@@ -733,6 +864,18 @@ void Game::draw_background_info(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
+void Game::draw_background_over(){
+  float const X=0;
+  float const Y=0;
+
+  sf::Texture texture;
+  texture.loadFromFile("res/over.jpg");
+
+  sf::Sprite sprite;
+  sprite.setTexture(texture);
+  sprite.setPosition(X,Y);
+  window->draw(sprite);
+};
 void Game::draw_button_start(){
   float const X=300;
   float const Y=200;
@@ -781,7 +924,7 @@ void Game::draw_button_back(){
   sprite.setTexture(texture);
   sprite.setPosition(X,Y);
   window->draw(sprite);}
-  void Game::draw_button(){
+void Game::draw_button(){
     float const X=300;
     float const Y=900;
 
@@ -792,15 +935,3 @@ void Game::draw_button_back(){
     sprite.setTexture(texture);
     sprite.setPosition(X,Y);
     window->draw(sprite);}
-void Game::button_sound(){
-  sf::SoundBuffer Buffer;
-  if (!Buffer.loadFromFile("1405.wav"))
-  {
-    window->close();
-  }
-  sf::Sound Sound;
-Sound.setBuffer(Buffer);
-Sound.play();
-Sound.stop();
-
-};
