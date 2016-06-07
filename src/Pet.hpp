@@ -21,23 +21,23 @@ public:
   void get_name() ;
   void placebo();
 
-  int property_of_condition(int &condition);
+  int propertyOfCondition(int &condition);
   void ControlProp();
 
-  void change_over(int value,int a);
+  void changeOver(int value,int a);
   string condition();
   string thoughts();
   void Action(string tmp);
 
-  int eating = DEFAULT_VALUE;
-  int leisure = DEFAULT_VALUE;
+  int eating = defaultValue;
+  int leisure = defaultValue;
   int need = 0;
-  int happiness = DEFAULT_VALUE;
-  int hygiene = DEFAULT_VALUE;
-  int health = DEFAULT_VALUE;
+  int happiness = defaultValue;
+  int hygiene = defaultValue;
+  int health = defaultValue;
 
 protected:
-  static const int DEFAULT_VALUE=100;
+  static const int defaultValue=100;
   string  name;
 
 };

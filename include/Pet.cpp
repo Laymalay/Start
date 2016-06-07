@@ -1,4 +1,4 @@
- #include "Pet.hpp"
+ #include "../src/Pet.hpp"
 
  using namespace std;
 
@@ -83,23 +83,23 @@
   }
 
 
-	int Pet::property_of_condition(int &condition) {
+	int Pet::propertyOfCondition(int &condition) {
 		if (condition > 100) return condition = 100;
 		if (condition < 0) return condition = 0;
 		else  return condition;
 	}
 	void Pet::ControlProp() {
-		property_of_condition(eating);
-		property_of_condition(leisure);
-		property_of_condition(need);
-		property_of_condition(happiness);
-		property_of_condition(hygiene);
-		property_of_condition(health);
+		propertyOfCondition(eating);
+		propertyOfCondition(leisure);
+		propertyOfCondition(need);
+		propertyOfCondition(happiness);
+		propertyOfCondition(hygiene);
+		propertyOfCondition(health);
 	}
 
 
 
-	void 	Pet::change_over(int value, int a) {
+	void 	Pet::changeOver(int value, int a) {
 
       eating -= value;
 			leisure -= value;

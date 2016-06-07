@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Game.hpp"
+#include "../src/Game.hpp"
 #include <unistd.h>
 using namespace std;
 #define true 1
@@ -45,12 +45,12 @@ void Game::menu(){
   window->clear(sf::Color::White);
 
 
-  Game::draw_background_menu();
-  Game::draw_button_start();
-  Game::draw_button_info();
-  Game::draw_button_exit();
-  Game::draw_button_speed1();
-  Game::draw_button_speed2();
+  Game::drawBackgroundMenu();
+  Game::drawButtonStart();
+  Game::drawButtonInfo();
+  Game::drawButtonExit();
+  Game::drawButtonSpeed1();
+  Game::drawButtonSpeed2();
 
   sf::Font font;
   sf::Text text;
@@ -60,7 +60,7 @@ void Game::menu(){
   font.loadFromFile("res/GoodDog.otf");
   text.setFont(font);
   text.setCharacterSize(70);
-  if (speed_life==1){
+  if (speedLife==1){
   text.setString("speed : slow " );
   text.setPosition (350,100);
   text.setColor(sf::Color::White);
@@ -130,8 +130,8 @@ void Game::menu(){
           buttonSound.play();
           while(1){
             window->clear(sf::Color::White);
-            Game::draw_background_info();
-            Game::draw_button_back();
+            Game::drawBackgroundInfo();
+            Game::drawButtonBack();
             sf::Font font;
             sf::Text text;
 
@@ -194,15 +194,15 @@ void Game::menu(){
         &&BUTTON_SPEED1_Y<y&&BUTTON_SPEED1_Y+200>y)
         {
           buttonSound.play();
-          speed_life=1;
-          speed_healht=1;
+          speedLife=1;
+          speedHealht=1;
         }
         if (BUTTON_SPEED2_X<x&&BUTTON_SPEED2_X+200>x
         &&BUTTON_SPEED2_Y<y&&BUTTON_SPEED2_Y+200>y)
         {
           buttonSound.play();
-          speed_life=10;
-          speed_healht=10;
+          speedLife=10;
+          speedHealht=10;
         }
 
   }
@@ -341,7 +341,7 @@ void Game::update()
       sgame=false;
     }
 
-      mycat_.change_over(speed_life,speed_healht);
+      mycat_.changeOver(speedLife,speedHealht);
       sleep(1);
 
 }
@@ -349,13 +349,13 @@ void Game::over(){
   sf::Music music;
   if (!music.openFromFile("res/over.ogg")){
      window->close();} // error
-     music.setVolume(50);         // reduce the volume
+     music.setVolume(50);// reduce the volume
      music.setLoop(true);
      music.play();
   while(1){
    window->clear(sf::Color::Black);
-   Game::draw_background_over();
-    Game::draw_button();
+   Game::drawBackgroundOver();
+    Game::drawButton();
       sf::Font font;
       sf::Text text;
       font.loadFromFile("res/GoodDog.otf");
@@ -409,28 +409,28 @@ void Game::over(){
 //////////////////////////////////////////
 void Game::render() {
   window->clear(sf::Color::White);
-  Game::draw_background();
-  Game::draw_button_WC();
-  Game::draw_button_food();
-  Game::draw_button_Sport();
-  Game::draw_button_shower();
-  Game::draw_button_Work();
-  Game::draw_button_placebo();
-  Game::draw_button_Cure();
-  Game::draw_button_Game();
-  Game::draw_button();
+  Game::drawBackground();
+  Game::drawButtonWC();
+  Game::drawButtonFood();
+  Game::drawButtonSport();
+  Game::drawButtonShower();
+  Game::drawButtonWork();
+  Game::drawButtonPlacebo();
+  Game::drawButtonCure();
+  Game::drawButtonGame();
+  Game::drawButton();
   Game::Cloud();
-  Game::show_condition(mycat_.condition_);
-  Game::show_thoughts(mycat_.thoughts_);
+  Game::showCondition(mycat_.condition_);
+  Game::showThoughts(mycat_.thoughts_);
 
 
   mycat_.ControlProp();
-  std::string eating_str = std::to_string(mycat_.eating);
-  std::string leisure_str = std::to_string(mycat_.leisure);
-  std::string need_str = std::to_string(mycat_.need);
-  std::string happiness_str = std::to_string(mycat_.happiness);
-  std::string hygiene_str = std::to_string(mycat_.hygiene);
-  std::string health_str = std::to_string(mycat_.health);
+  std::string eatingStr = std::to_string(mycat_.eating);
+  std::string leisureStr = std::to_string(mycat_.leisure);
+  std::string needStr = std::to_string(mycat_.need);
+  std::string happinessStr = std::to_string(mycat_.happiness);
+  std::string hygieneStr = std::to_string(mycat_.hygiene);
+  std::string healthStr = std::to_string(mycat_.health);
 
 
   sf::Font font;
@@ -439,32 +439,32 @@ void Game::render() {
   text.setFont(font);
   text.setCharacterSize(50);
 
-  text.setString("eating-->"+eating_str);
+  text.setString("eating-->"+eatingStr);
   text.setPosition (10,0);
   text.setColor(sf::Color::Red);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-  text.setString("leisure-->"+leisure_str);
+  text.setString("leisure-->"+leisureStr);
   text.setPosition (10,50);
   text.setColor(sf::Color::Yellow);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-  text.setString("need-->"+need_str);
+  text.setString("need-->"+needStr);
   text.setPosition (10,100);
   text.setColor(sf::Color::Blue);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-  text.setString("happiness-->"+happiness_str);
+  text.setString("happiness-->"+happinessStr);
   text.setPosition (10,150);
   text.setColor(sf::Color::Cyan);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-  text.setString("hygiene-->"+hygiene_str);
+  text.setString("hygiene-->"+hygieneStr);
   text.setPosition (10,200);
   text.setColor(sf::Color::Green);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
   window->draw(text);
-  text.setString("health-->"+health_str);
+  text.setString("health-->"+healthStr);
   text.setPosition (10,250);
   text.setColor(sf::Color::Magenta);
   text.setStyle(sf::Text::Bold | sf::Text::Italic);
@@ -494,7 +494,7 @@ void Game::render() {
 //              Condition               //
 //////////////////////////////////////////
 //happy,good,so_so,sad,verysad,died
-void Game::show_condition (string condition_){
+void Game::showCondition (string condition_){
   if (condition_ == "ill") Game::ill();
   if (condition_ == "happy") Game::happy();
   if (condition_ == "good") Game::good();
@@ -512,11 +512,11 @@ void Game::show_condition (string condition_){
 
 
 }
-void Game::show_thoughts(string thoughts){
-  if (thoughts == "need_wc") Game::need_wc();
+void Game::showThoughts(string thoughts){
+  if (thoughts == "need_wc") Game::needWc();
   if (thoughts == "hungry") Game::hungry();
-  if (thoughts == "need_cure") Game::need_cure();
-  if (thoughts == "need_shower") Game::need_shower();
+  if (thoughts == "need_cure") Game::needCure();
+  if (thoughts == "need_shower") Game::needShower();
   if (thoughts == "ok") Game::ok();
 }
 void Game::happy(){
@@ -734,7 +734,7 @@ void Game::hungry(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::need_wc(){
+void Game::needWc(){
   float const X=730;
   float const Y=50;
 
@@ -746,7 +746,7 @@ void Game::need_wc(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::need_cure(){
+void Game::needCure(){
   float const X=700;
   float const Y=50;
 
@@ -758,7 +758,7 @@ void Game::need_cure(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::need_shower(){
+void Game::needShower(){
   float const X=700;
   float const Y=50;
 
@@ -774,7 +774,7 @@ void Game::need_shower(){
 //////////////////////////////////////////
 //              BUTTON                  //
 //////////////////////////////////////////
-void Game::draw_button_shower(){
+void Game::drawButtonShower(){
   float const X=550;
   float const Y=600;
 
@@ -786,7 +786,7 @@ void Game::draw_button_shower(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_food(){
+void Game::drawButtonFood(){
   float const X=150;
   float const Y=600;
 
@@ -798,7 +798,7 @@ void Game::draw_button_food(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_WC(){
+void Game::drawButtonWC(){
   float const X=350;
   float const Y=600;
 
@@ -810,7 +810,7 @@ void Game::draw_button_WC(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_Game(){
+void Game::drawButtonGame(){
   float const X=550;
   float const Y=750;
 
@@ -822,7 +822,7 @@ void Game::draw_button_Game(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_Sport(){
+void Game::drawButtonSport(){
   float const X=750;
   float const Y=600;
 
@@ -834,7 +834,7 @@ void Game::draw_button_Sport(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_Work(){
+void Game::drawButtonWork(){
   float const X=150;
   float const Y=750;
 
@@ -846,7 +846,7 @@ void Game::draw_button_Work(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_Cure(){
+void Game::drawButtonCure(){
   float const X=750;
   float const Y=750;
 
@@ -858,7 +858,7 @@ void Game::draw_button_Cure(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_button_placebo(){
+void Game::drawButtonPlacebo(){
   float const X=350;
   float const Y=750;
 
@@ -870,7 +870,7 @@ void Game::draw_button_placebo(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_background(){
+void Game::drawBackground(){
   float const X=0;
   float const Y=0;
 
@@ -882,7 +882,7 @@ void Game::draw_background(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 }
-void Game::draw_background_menu(){
+void Game::drawBackgroundMenu(){
   float const X=0;
   float const Y=0;
 
@@ -894,7 +894,7 @@ void Game::draw_background_menu(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
-void Game::draw_background_info(){
+void Game::drawBackgroundInfo(){
   float const X=0;
   float const Y=0;
 
@@ -906,7 +906,7 @@ void Game::draw_background_info(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
-void Game::draw_background_over(){
+void Game::drawBackgroundOver(){
   float const X=0;
   float const Y=0;
 
@@ -918,7 +918,7 @@ void Game::draw_background_over(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
-void Game::draw_button_start(){
+void Game::drawButtonStart(){
   float const X=300;
   float const Y=200;
 
@@ -931,7 +931,7 @@ void Game::draw_button_start(){
   window->draw(sprite);
 
 };
-void Game::draw_button_exit(){
+void Game::drawButtonExit(){
   float const X=300;
   float const Y=400;
 
@@ -943,7 +943,7 @@ void Game::draw_button_exit(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
-void Game::draw_button_info(){
+void Game::drawButtonInfo(){
   float const X=300;
   float const Y=600;
 
@@ -955,7 +955,7 @@ void Game::draw_button_info(){
   sprite.setPosition(X,Y);
   window->draw(sprite);
 };
-void Game::draw_button_back(){
+void Game::drawButtonBack(){
   float const X=300;
   float const Y=600;
 
@@ -968,7 +968,7 @@ void Game::draw_button_back(){
   window->draw(sprite);}
 
 
-void Game::draw_button(){
+void Game::drawButton(){
     float const X=300;
     float const Y=900;
 
@@ -979,7 +979,7 @@ void Game::draw_button(){
     sprite.setTexture(texture);
     sprite.setPosition(X,Y);
     window->draw(sprite);}
-void Game::draw_button_speed1(){
+void Game::drawButtonSpeed1(){
       float const X=50;
       float const Y=500;
 
@@ -991,7 +991,7 @@ void Game::draw_button_speed1(){
       sprite.setPosition(X,Y);
       window->draw(sprite);
     };
-void Game::draw_button_speed2(){
+void Game::drawButtonSpeed2(){
       float const X=750;
       float const Y=500;
 

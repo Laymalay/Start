@@ -43,8 +43,9 @@ class Game {
     sf::Sound GameSound;
 
     int sshower=0,scure=0,swork=0,sgame=0;
-    int speed_life=1;
-    int speed_healht=1;
+    int speedLife=1;
+    int speedHealht=1;
+
     float const BUTTON_X = 300;
     float const BUTTON_Y = 900;
 
@@ -91,31 +92,31 @@ class Game {
     float const BUTTON_SPEED2_X = 750;
     float const BUTTON_SPEED2_Y = 500;
 
-    void draw_button_speed1();
-    void draw_button_speed2();
+    void drawButtonSpeed1();
+    void drawButtonSpeed2();
 
-    void draw_button_placebo();
-    void draw_button_shower();
-    void draw_button_food();
-    void draw_button_WC();
-    void draw_button_Game();
-    void draw_button_Sport();
-    void draw_button_Work();
-    void draw_button_Cure();
-    void draw_background();
-    void draw_background_menu();
-    void draw_background_info();
-    void draw_background_over();
-    void draw_button_start();
-    void draw_button_exit();
-    void draw_button_info();
-    void draw_button_back();
-    void draw_button();
+    void drawButtonPlacebo();
+    void drawButtonShower();
+    void drawButtonFood();
+    void drawButtonWC();
+    void drawButtonGame();
+    void drawButtonSport();
+    void drawButtonWork();
+    void drawButtonCure();
+    void drawBackground();
+    void drawBackgroundMenu();
+    void drawBackgroundInfo();
+    void drawBackgroundOver();
+    void drawButtonStart();
+    void drawButtonExit();
+    void drawButtonInfo();
+    void drawButtonBack();
+    void drawButton();
     //////////////////////////////////////////
     //              Condition               //
     //////////////////////////////////////////
-    void show_condition(string condition);
-    void show_thoughts(string thoughts);
+    void showCondition(string condition);
+    void showThoughts(string thoughts);
     void happy();
     void good();
     void so_so();
@@ -127,10 +128,10 @@ class Game {
     //                мысли                 //
     //////////////////////////////////////////
     void Cloud();
-    void need_shower();
+    void needShower();
     void hungry();
-    void need_wc();
-    void need_cure();
+    void needWc();
+    void needCure();
     void ok();
 
     //////////////////////////////////////////
