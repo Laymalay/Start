@@ -4,29 +4,30 @@
 
 
 
-class Pet {
+class Pet
+{
 
 public:
 
-  Pet(std::string name);
+  Pet ();
   std::string condition_;
   std::string thoughts_;
-  void shower();
-  void food() ;
-  void WC();
-  void Game();
-  void Sport();
-  void Work() ;
-  void Cure() ;
-  void placebo();
+  void shower ();
+  void food ();
+  void WC ();
+  void Game ();
+  void Sport ();
+  void Work ();
+  void Cure ();
+  void placebo ();
 
-  int propertyOfCondition(int &condition);
-  void ControlProp();
+  int propertyOfCondition (int &condition);
+  void ControlProp ();
 
-  void changeOver(int value,int a);
-  std::string condition();
-  std::string thoughts();
-  void Action(std::string tmp);
+  void changeOver (int value, int a);
+    std::string condition ();
+    std::string thoughts ();
+  void Action (std::string tmp);
 
   int eating = defaultValue;
   int leisure = defaultValue;
@@ -36,8 +37,8 @@ public:
   int health = defaultValue;
 
 protected:
-  static const int defaultValue=100;
-  std::string  name;
+  static const int defaultValue = 100;
+    std::string name;
 
 };
 #endif
