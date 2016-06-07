@@ -5,7 +5,7 @@
 #include <ctime>
 #ifndef GAME_HPP_
 #define GAME_HPP_
-using namespace std;
+
 
 
 
@@ -14,7 +14,7 @@ class Game {
   public:
 
 
-    Game(float widht,float hight,string name);
+    Game(float widht,float hight,std::string name);
     void menu();
     void start();
     void control();
@@ -103,20 +103,20 @@ class Game {
     void drawButtonSport();
     void drawButtonWork();
     void drawButtonCure();
-    void drawBackground();
-    void drawBackgroundMenu();
-    void drawBackgroundInfo();
-    void drawBackgroundOver();
     void drawButtonStart();
     void drawButtonExit();
     void drawButtonInfo();
     void drawButtonBack();
     void drawButton();
+    void drawBackground();
+    void drawBackgroundMenu();
+    void drawBackgroundInfo();
+    void drawBackgroundOver();
     //////////////////////////////////////////
     //              Condition               //
     //////////////////////////////////////////
-    void showCondition(string condition);
-    void showThoughts(string thoughts);
+    void showCondition(std::string condition);
+    void showThoughts(std::string thoughts);
     void happy();
     void good();
     void so_so();
@@ -146,5 +146,30 @@ class Game {
     void cure();
 
 
+    enum Button {
+            WRK,
+            SPR,
+            GM,
+            FD,
+            SH,
+            CR,
+            WC,
+            PLC,
+            STR,
+            EX,
+            BC,
+            INF
+          };
+
+    typedef struct GameButton{
+      int X,Y;
+      std::string PATH;
+    }GameButton;
+
+GameButton getButton(Button button) ;
+
+~Game(){
+  delete(window);
+}
 };
 #endif

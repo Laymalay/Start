@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 #include "../src/Game.hpp"
 #include <unistd.h>
-using namespace std;
+
 #define true 1
 #define false 0
 
@@ -10,10 +10,13 @@ using namespace std;
 
 
 
-Game::Game(float widht,float hight, string name): mycat_(name){
+Game::Game(float widht,float hight, std::string name): mycat_(name){
 
    window = new sf::RenderWindow(sf::VideoMode(widht,hight),
     "tamagotchi");
+    if (!window){
+      exit(1);
+    }
    buttonSoundBuffer.loadFromFile("res/1405.wav");
    buttonSound.setBuffer(buttonSoundBuffer);
    music.openFromFile("res/bcg.ogg");
@@ -494,7 +497,7 @@ void Game::render() {
 //              Condition               //
 //////////////////////////////////////////
 //happy,good,so_so,sad,verysad,died
-void Game::showCondition (string condition_){
+void Game::showCondition (std::string condition_){
   if (condition_ == "ill") Game::ill();
   if (condition_ == "happy") Game::happy();
   if (condition_ == "good") Game::good();
@@ -512,7 +515,7 @@ void Game::showCondition (string condition_){
 
 
 }
-void Game::showThoughts(string thoughts){
+void Game::showThoughts(std::string thoughts){
   if (thoughts == "need_wc") Game::needWc();
   if (thoughts == "hungry") Game::hungry();
   if (thoughts == "need_cure") Game::needCure();
@@ -1003,3 +1006,86 @@ void Game::drawButtonSpeed2(){
       sprite.setPosition(X,Y);
       window->draw(sprite);
     };
+
+Game::GameButton Game::getButton(Button button){
+  switch(button) {
+               case button.STR:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+                 break;
+               }
+               case button.WRK:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.SPR:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.GM:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.FD:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.SH:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.CR:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.WC:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.PLC:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.EX:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.BC:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }case button.INF:
+               {
+                 const float X = 100;
+                 const float Y = 100;
+                 const std::string PATH = "res/start.png";
+                 return GameButton(X, Y, PATH);
+               }
+
+
+             }
+
+}

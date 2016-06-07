@@ -1,8 +1,8 @@
  #include "../src/Pet.hpp"
 
- using namespace std;
 
-		Pet::Pet( string name) {condition_="happy"; thoughts_="ok";}
+
+		Pet::Pet( std::string name) {condition_="happy"; thoughts_="ok";}
 
 	void Pet::shower() {
 			hygiene = 100;
@@ -61,10 +61,8 @@
     happiness+=30;
     condition_="happy";
   }
-	void Pet::get_name() {
-	}
 
-	string Pet::condition() {
+	std::string Pet::condition() {
     if (eating<0.5&&health<0.5&&happiness<05) return condition_="died";
     if (health <20) return condition_="ill";
     if (happiness>90) return condition_="happy";
@@ -74,7 +72,7 @@
     if (happiness>15&&happiness<30) return condition_="verysad";
     else return "error";
 	}
-  string Pet::thoughts(){
+  std::string Pet::thoughts(){
     if (eating < 50) return thoughts_="hungry";
     if (need > 50) return thoughts_="need_wc";
     if (happiness < 60 ) return thoughts_="need_cure";
@@ -114,7 +112,7 @@
 
 		}
 
-	void Pet::Action(string tmp)
+	void Pet::Action(std::string tmp)
 	{
 		if (tmp == "food") food();
 		if (tmp == "wc") WC();
