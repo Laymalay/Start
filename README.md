@@ -4,3 +4,4 @@
 
 Тамагочи,"Simple Kitty"
 
+gogi
